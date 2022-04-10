@@ -5,6 +5,7 @@ require('dotenv').config()
 const router = express.Router();
 const app = express();
 const axios = require('axios');
+const bodyParser = require("body-parser");
 
 
 const {BigQuery} = require('@google-cloud/bigquery');
