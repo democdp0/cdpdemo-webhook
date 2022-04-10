@@ -6,24 +6,22 @@ const router = express.Router();
 const app = express();
 const axios = require('axios');
 
-  // [START bigquery_query]
-  // [START bigquery_client_default_credentials]
-  // Import the Google Cloud client library using default credentials
-  const {BigQuery} = require('@google-cloud/bigquery');
-  const bigquery = new BigQuery();
-  // [END bigquery_client_default_credentials]
-  async function query() {
-    // Queries the U.S. given names dataset for the state of Texas.
+
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+
+router.post('/wordpressdb', async (request, response) => {
 
     const query = `SELECT *
-      FROM \`cdptamrlytics.datasetFromTamr.known-users-2\`
-      LIMIT 100`;
+    FROM \`cdptamrlytics.datasetFromTamr.known-users-2\`
+    LIMIT 10`;
 
     // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
     const options = {
-      query: query,
-      // Location must match that of the dataset(s) referenced in the query.
-      location: 'asia-southeast1',
+    query: query,
+    // Location must match that of the dataset(s) referenced in the query.
+    location: 'asia-southeast1',
     };
 
     // Run the query as a job
@@ -36,6 +34,12 @@ const axios = require('axios');
     // Print the results
     console.log('Rows:');
     rows.forEach(row => console.log(row));
-  }
-  // [END bigquery_query]
-  query();
+
+    response.statusCode = 200;
+    response.send(rows);
+
+});
+
+app.use("/", router);
+
+http.createServer(app).listen(80);
