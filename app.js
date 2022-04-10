@@ -11,7 +11,7 @@ const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 
-router.post('/wordpressdb', async (request, response) => {
+router.get('/wordpressdb', async (request, response) => {
 
     const query = `SELECT *
     FROM \`cdptamrlytics.datasetFromTamr.known-users-2\`
