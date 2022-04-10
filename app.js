@@ -10,6 +10,21 @@ const axios = require('axios');
 const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
+
+app.use(bodyParser.json());
+// Add headers before the routes are defined
+const allowedOrigins = ['http://localhost:4200', 'https://devopsinterview.app'];
+app.use(function (req, res, next) {
+
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");  
+
+    // Pass to next layer of middleware
+    next();
+});
 
 router.get('/wordpressdb', async (request, response) => {
 
