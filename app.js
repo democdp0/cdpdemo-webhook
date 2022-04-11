@@ -41,7 +41,7 @@ router.post('/newcustomer', async (request, response) => {
       primaryKey,
       date)
   VALUES
-    ('`+request.body["shipping"]["address_1"]+`','`+request.body["first_name"]+`','`+request.body["email"]+`','`+request.body["city"]+`','`+request.body["country"]+`',34,CURRENT_TIMESTAMP())`;
+    ('`+request.body["billing"]["address_1"]+`','`+request.body["first_name"]+`','`+request.body["email"]+`','`+request.body["city"]+`','`+request.body["country"]+`',34,CURRENT_TIMESTAMP())`;
 
     // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
     const options = {
