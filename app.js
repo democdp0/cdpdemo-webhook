@@ -27,11 +27,19 @@ app.use(function (req, res, next) {
     next();
 });
 
+router.post('/webhook', (request, response) => {
+
+    console.log(request.body)
+
+    response.statusCode = 200;
+    response.send("Webhook received");
+});
+
 router.get('/wordpressdb', async (request, response) => {
 
     const query = `SELECT *
     FROM \`cdptamrlytics.datasetFromTamr.known-users-2\`
-    LIMIT 10`;
+    LIMIT 5`;
 
     // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
     const options = {
