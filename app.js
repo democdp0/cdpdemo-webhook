@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 // Add headers before the routes are defined
-const allowedOrigins = ['http://localhost:4200', 'https://devopsinterview.app'];
+const allowedOrigins = ['http://localhost:4200'];
 app.use(function (req, res, next) {
 
     res.header("Access-Control-Allow-Origin", "*");
@@ -51,13 +51,13 @@ router.get('/wordpressdb', async (request, response) => {
 
     // Run the query as a job
     const [job] = await bigquery.createQueryJob(options);
-    console.log(`Job ${job.id} started.`);
+    //console.log(`Job ${job.id} started.`);
 
     // Wait for the query to finish
     const [rows] = await job.getQueryResults();
 
     // Print the results
-    console.log('Rows:');
+    //console.log('Rows:');
     rows.forEach(row => console.log(row));
 
     response.statusCode = 200;
