@@ -58,7 +58,7 @@ router.get('/wordpressdb', async (request, response) => {
 
     // Print the results
     //console.log('Rows:');
-    rows.forEach(row => console.log(row));
+    // rows.forEach(row => console.log(row));
 
     response.statusCode = 200;
     response.send("ok");
