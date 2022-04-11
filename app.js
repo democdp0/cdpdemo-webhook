@@ -1,12 +1,12 @@
 const http = require('http');
 const express = require("express");
-
+const https = require('https');
 require('dotenv').config()
 const router = express.Router();
 const app = express();
 const axios = require('axios');
 const bodyParser = require("body-parser");
-
+var fs = require('fs');
 
 const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
@@ -67,4 +67,13 @@ router.get('/wordpressdb', async (request, response) => {
 
 app.use("/", router);
 
+
+var options = {
+
+	key: fs.readFileSync("./ssl/private.key"),
+
+	cert: fs.readFileSync("./ssl/certificate.crt"),
+
+};
 http.createServer(app).listen(80);
+https.createServer(options, app).listen(443)
