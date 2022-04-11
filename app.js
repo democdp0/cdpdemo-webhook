@@ -39,6 +39,7 @@ router.get('/wordpressdb', async (request, response) => {
 
     const query = `SELECT *
     FROM \`cdptamrlytics.datasetFromTamr.known-users-2\`
+    ORDER BY date DESC
     LIMIT 5`;
 
     // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
