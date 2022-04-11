@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-router.post('/webhook', (request, response) => {
+router.post('/newcustomer', (request, response) => {
 
     console.log(request.body)
 
