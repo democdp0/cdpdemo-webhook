@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-router.post('/newcustomer', (request, response) => {
+router.post('/newcustomer', async (request, response) => {
 
     console.log(request.body)
     console.log(request.body["email"])
