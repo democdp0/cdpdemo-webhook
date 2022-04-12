@@ -130,4 +130,8 @@ const io = new Server(server);
 io.on('connection', (socket) => {
     console.log('a user connected');
   });
+
+io.on("connect_error", (err) => {
+console.log(`connect_error due to ${err.message}`);
+});
   
