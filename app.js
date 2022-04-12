@@ -8,7 +8,7 @@ const app = express();
 const axios = require('axios');
 const bodyParser = require("body-parser");
 var fs = require('fs');
-var cors = require('cors');
+
 const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
@@ -22,15 +22,25 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 // Add headers before the routes are defined
 const allowedOrigins = ['http://localhost:4200','https://api.cdpdemodashboard.tk','https://cdpdemodashboard.tk','https://cdpdemoportal.tk'];
-// app.use(function (req, res, next) {
+app.use(function (req, res, next) {
 
-//     res.header("Access-Control-Allow-Origin", allowedOrigins);
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");  
+    res.header("Access-Control-Allow-Origin", allowedOrigins);
+   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");  
 
-//     // Pass to next layer of middleware
-//     next();
-// });
-app.use(cors({origin: '*'}));
+    
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    next();
+});
+
 
 router.post('/newcustomer', async (request, response) => {
 
