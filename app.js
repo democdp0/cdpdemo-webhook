@@ -108,8 +108,8 @@ var options = {
 };
 
 
-http.createServer(app).listen(80);
-const server = https.createServer(options, app).listen(443)
+const server = http.createServer(app).listen(80);
+https.createServer(options, app).listen(443)
 
 const { Server } = require("socket.io");
 const io = new Server(server);
