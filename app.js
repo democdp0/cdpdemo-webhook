@@ -24,19 +24,19 @@ app.use(bodyParser.json());
 const allowedOrigins = ['http://localhost:4200','https://api.cdpdemodashboard.tk/socket.io/','https://api.cdpdemodashboard.tk','https://cdpdemodashboard.tk','https://cdpdemoportal.tk'];
 app.use(function (req, res, next) {
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*');
    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");  
 
     
     // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Credentials', true);
 
     next();
 });
