@@ -82,7 +82,7 @@ router.post('/newcustomer', async (request, response) => {
     catch (err) {
         io.emit("reload","world");
         response.statusCode = 400;
-        response.send("Error");
+        response.send(err);
 
     }
 
