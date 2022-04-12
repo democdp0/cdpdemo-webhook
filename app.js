@@ -137,7 +137,12 @@ var options = {
 http.createServer(app).listen(80);
 const server = https.createServer(options, app).listen(443)
 
-const io = new Server(server);
+const io = new Server(server,{
+    cors: {
+      origin: "https://cdpdemodashboard.tk",
+      methods: ["GET", "POST"]
+    }
+  });
 io.on('connection', (socket) => {
     console.log('a user connected');
   });
