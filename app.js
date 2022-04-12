@@ -8,7 +8,7 @@ const app = express();
 const axios = require('axios');
 const bodyParser = require("body-parser");
 var fs = require('fs');
-
+var cors = require('cors');
 const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
@@ -22,14 +22,15 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 // Add headers before the routes are defined
 const allowedOrigins = ['http://localhost:4200','https://api.cdpdemodashboard.tk','https://cdpdemodashboard.tk','https://cdpdemoportal.tk'];
-app.use(function (req, res, next) {
+// app.use(function (req, res, next) {
 
-    res.header("Access-Control-Allow-Origin", allowedOrigins);
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");  
+//     res.header("Access-Control-Allow-Origin", allowedOrigins);
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");  
 
-    // Pass to next layer of middleware
-    next();
-});
+//     // Pass to next layer of middleware
+//     next();
+// });
+app.use(cors({origin: '*'}));
 
 router.post('/newcustomer', async (request, response) => {
 
