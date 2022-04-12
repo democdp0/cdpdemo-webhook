@@ -95,18 +95,6 @@ router.get('/wordpressdb', async (request, response) => {
 });
 
 
-const ws = new WebSocket('ws://api.cdpdemodashboard.tk/ws');
-
-ws.on('open', function open() {
-  ws.send('something');
-});
-
-ws.on('message', function message(data) {
-  console.log('received: %s', data);
-});
-
-
-
 
 app.use("/", router);
 
