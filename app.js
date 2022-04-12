@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 const allowedOrigins = ['http://localhost:4200','https://api.cdpdemodashboard.tk/socket.io/','https://api.cdpdemodashboard.tk','https://cdpdemodashboard.tk','https://cdpdemoportal.tk'];
 app.use(function (req, res, next) {
 
-    res.header("Access-Control-Allow-Origin", allowedOrigins);
+    res.setHeader('Access-Control-Allow-Origin', '*');
    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");  
 
     
