@@ -80,7 +80,7 @@ router.post('/newcustomer', async (request, response) => {
         response.send("Webhook received");
     }
     catch (err) {
- 
+        io.emit("reload","world");
         response.statusCode = 400;
         response.send("Error");
 
