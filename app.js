@@ -1,3 +1,4 @@
+import { WebSocketServer } from 'ws';
 const http = require('http');
 const express = require("express");
 const https = require('https');
@@ -92,7 +93,32 @@ router.get('/wordpressdb', async (request, response) => {
 
 });
 
+
+const ws = new WebSocket('ws://api.cdpdemodashboard.tk/ws');
+
+ws.on('open', function open() {
+  ws.send('something');
+});
+
+ws.on('message', function message(data) {
+  console.log('received: %s', data);
+});
+
+
+
+
 app.use("/", router);
+
+
+const wss = new WebSocketServer({ port: 8080 });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function message(data) {
+    console.log('received: %s', data);
+  });
+
+  ws.send('something');
+});
 
 
 var options = {
@@ -102,5 +128,7 @@ var options = {
 	cert: fs.readFileSync("./ssl/certificate.crt"),
 
 };
+
+
 http.createServer(app).listen(80);
 https.createServer(options, app).listen(443)
