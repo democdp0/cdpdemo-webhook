@@ -36,36 +36,46 @@ router.post('/newcustomer', async (request, response) => {
     console.log(request.body)
     console.log(request.body["email"])
 
-    const query = `INSERT INTO
-    \`cdptamrlytics.datasetFromTamr.known-users-2\` (Address,
-      Name,
-      Email,
-      city,
-      country,
-      primaryKey,
-      date)
-  VALUES
-    ('`+request.body["billing"]["address_1"]+`','`+request.body["first_name"]+`','`+request.body["email"]+`','`+request.body["billing"]["city"]+`','`+request.body["billing"]["country"]+`',34,CURRENT_TIMESTAMP())`;
+    try{
+        const query = `INSERT INTO
+        \`cdptamrlytics.datasetFromTamr.known-users-2\` (Address,
+          Name,
+          Email,
+          city,
+          country,
+          primaryKey,
+          date)
+      VALUES
+        ('`+request.body["billing"]["address_1"]+`','`+request.body["first_name"]+`','`+request.body["email"]+`','`+request.body["billing"]["city"]+`','`+request.body["billing"]["country"]+`',34,CURRENT_TIMESTAMP())`;
+    
+        // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
+        const options = {
+        query: query,
+        // Location must match that of the dataset(s) referenced in the query.
+        location: 'asia-southeast1',
+        };
+    
+        // Run the query as a job
+        const [job] = await bigquery.createQueryJob(options);
+        //console.log(`Job ${job.id} started.`);
+    
+        // Wait for the query to finish
+        const [rows] = await job.getQueryResults();
+    
+        io.emit("reload");
+    
+        console.log("User ingested");
+        response.statusCode = 200;
+        response.send("Webhook received");
+    }
+    catch (err) {
 
-    // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
-    const options = {
-    query: query,
-    // Location must match that of the dataset(s) referenced in the query.
-    location: 'asia-southeast1',
-    };
+        response.statusCode = 400;
+        response.send("Error");
 
-    // Run the query as a job
-    const [job] = await bigquery.createQueryJob(options);
-    //console.log(`Job ${job.id} started.`);
+    }
 
-    // Wait for the query to finish
-    const [rows] = await job.getQueryResults();
-
-    io.emit("reload");
-
-    console.log("User ingested");
-    response.statusCode = 200;
-    response.send("Webhook received");
+   
 });
 
 router.get('/wordpressdb', async (request, response) => {
