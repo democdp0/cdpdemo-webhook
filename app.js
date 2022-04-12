@@ -73,14 +73,14 @@ router.post('/newcustomer', async (request, response) => {
         // Wait for the query to finish
         const [rows] = await job.getQueryResults();
     
-        io.emit("reload");
+        io.emit("reload","world");
     
         console.log("User ingested");
         response.statusCode = 200;
         response.send("Webhook received");
     }
     catch (err) {
-        io.emit("reload");
+ 
         response.statusCode = 400;
         response.send("Error");
 
