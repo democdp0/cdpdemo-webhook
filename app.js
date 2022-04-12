@@ -12,6 +12,9 @@ var fs = require('fs');
 const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
+const { Server } = require("socket.io");
+const io = new Server(server);
+
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
@@ -108,11 +111,9 @@ var options = {
 };
 
 
-const server = http.createServer(app).listen(80);
-https.createServer(options, app).listen(443)
+http.createServer(app).listen(80);
+const server = https.createServer(options, app).listen(443)
 
-const { Server } = require("socket.io");
-const io = new Server(server);
 
 io.on('connection', (socket) => {
     console.log('a user connected');
