@@ -143,7 +143,11 @@ router.get('/wordpressdb', async (request, response) => {
 
 });
 
-
+let config = {
+  headers: {
+    Authorization: "Basic bmVvNGo6ZHQ=",
+  }
+}
 let data = {
   "statements": [
     {
