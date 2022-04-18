@@ -149,6 +149,7 @@ let config = {
   }
 }
 let data = {
+
   "statements": [
     {
       "statement": "MERGE  (p:Person {email:'purdy.dasia@osinski.com' }) SET p.first_name = 'Fan' SET p.last_name = 'Zheng Min'"
@@ -157,7 +158,14 @@ let data = {
 }
 
 axios
-.post('https://neo4j.cdpdemodashboard.tk:7473/db/data/transaction/commit', data,config)
+.post('https://neo4j.cdpdemodashboard.tk:7473/db/data/transaction/commit', {
+
+  "statements": [
+    {
+      "statement": "MERGE  (p:Person {email:'purdy.dasia@osinski.com' }) SET p.first_name = 'Fan' SET p.last_name = 'Zheng Min'"
+    }
+  ]
+},config)
 .then(res => {
 
 })
