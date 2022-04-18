@@ -114,7 +114,7 @@ router.post('/newcustomer', async (request, response) => {
 });
 
 
-router.get('/neo4jjson', async (request, response) => {
+router.post('/neo4jjson', async (request, response) => {
 
   let config = {
     headers: {
