@@ -13,7 +13,6 @@ const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 const { Server } = require("socket.io");
-var neo4j = require('neo4j-driver')
 
 app.use(bodyParser.urlencoded({
 	extended: false
@@ -86,6 +85,32 @@ router.post('/newcustomer', async (request, response) => {
 
     }
 
+    let config = {
+      headers: {
+        Authorization: "Basic bmVvNGo6ZHQ=",
+      }
+    }
+
+    let data = {
+      "statements": [
+        {
+          "statement": "MERGE  (p:Person {email:"+request.body["email"]+" }) SET p.first_name = "+request.body["first_name"]+" SET p.last_name = "+request.body["last_name"]+""
+        }
+      ]
+    }
+
+    axios
+		.post('https://neo4j.cdpdemodashboard.tk:7473/db/data/transaction/commit', data,config)
+		.then(res => {
+			response.statusCode = 200;
+			response.send("ok");
+		})
+		.catch(error => {
+			console.error(error)
+			response.statusCode = 401;
+			response.send(error);
+		})
+
    
 });
 
@@ -151,75 +176,3 @@ io.on("connect_error", (err) => {
 console.log(`connect_error due to ${err.message}`);
 });
   
-
-var driver = neo4j.driver(
-  'neo4j://neo4j.cdpdemodashboard.tk:7473',
-  neo4j.auth.basic('neo4j', 'dt'), { encrypted: 'ENCRYPTION_ON',   trust: "TRUST_SYSTEM_CA_SIGNED_CERTIFICATES", trustedCertificates:['./ssl/neo4j.crt'] ,  logging: {
-    level: 'debug',
-    logger: (level, message) => console.log(level + ' ' + message)
-  }} 
-)
-
-
-
-var session = driver.session({
-  database: 'neo4j',
-  defaultAccessMode: neo4j.session.WRITE
-})
-
-session
-  .run('MERGE (james:Person {name : $nameParam}) RETURN james.name AS name', {
-    nameParam: 'James'
-  })
-  .then(result => {
-    result.records.forEach(record => {
-      console.log(record.get('name'))
-    })
-  })
-  .catch(error => {
-    console.log(error)
-  })
-  .then(() => session.close())
-// session
-//   .run('MERGE (alice:Person {name : $nameParam}) RETURN alice.name AS name', {
-//     nameParam: 'Alice'
-//   })
-//   .subscribe({
-//     onKeys: keys => {
-//       console.log(keys)
-//     },
-//     onNext: record => {
-//       console.log(record.get('name'))
-//     },
-//     onCompleted: () => {
-//       session.close() // returns a Promise
-//     },
-//     onError: error => {
-//       console.log(error)
-//     }
-//   })
-
-process.stdin.resume();//so the program will not close instantly
-
-async function exitHandler(options, exitCode) {
-    if (options.cleanup) 
-    {
-      console.log('clean');
-      await driver.close()
-    }
-    if (exitCode || exitCode === 0) console.log(exitCode);
-    if (options.exit) process.exit();
-}
-
-//do something when app is closing
-process.on('exit', exitHandler.bind(null,{cleanup:true}));
-
-//catches ctrl+c event
-process.on('SIGINT', exitHandler.bind(null, {exit:true}));
-
-// catches "kill pid" (for example: nodemon restart)
-process.on('SIGUSR1', exitHandler.bind(null, {exit:true}));
-process.on('SIGUSR2', exitHandler.bind(null, {exit:true}));
-
-//catches uncaught exceptions
-process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
