@@ -207,8 +207,7 @@ router.get('/usersaovecommerceb', async (request, response) => {
 router.get('/visitedurl', async (request, response) => {
 
   const query = `SELECT *
-  FROM \`cdptamrlytics.datasetFromTamr.visited_url\`
-  ORDER BY Date_registered DESC`;
+  FROM \`cdptamrlytics.datasetFromTamr.visited_url`;
 
   // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
   const options = {
