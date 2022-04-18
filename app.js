@@ -152,7 +152,7 @@ let data = {
 
   "statements": [
     {
-      "statement": "MERGE  (p:Person {email:'purdy.dasia@osinski.com' }) SET p.first_name = 'Fan' SET p.last_name = 'Zheng Min'"
+      "statement": "MERGE  (p:Person {email:'alibrown@gmail.com' }) SET p.first_name = 'Ali' SET p.last_name = 'Brown'"
     }
   ]
 }
