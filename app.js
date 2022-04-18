@@ -93,7 +93,7 @@ router.post('/newcustomer', async (request, response) => {
     let data = {
       "statements": [
         {
-          "statement": "MERGE  (p:Person {email:'"+request.body["email"]+"' }) MERGE (w:Ecommerce {website:'https://cdpdemoportal.tk'}) MERGE (p)-[c:CUSTOMER {wp_userid:'"+request.body["id"]+"'}]->(w) SET p.first_name = '"+request.body["first_name"]+"' SET p.last_name = '"+request.body["last_name"]+"'"
+          "statement": "MERGE  (p:Person {email:'"+request.body["email"]+"' }) MERGE (w:Ecommerce {website:'https://cdpdemoportal.tk'}) MERGE (p)-[c:CUSTOMER {wp_userid: toInteger("+request.body["id"]+")}]->(w) SET p.first_name = '"+request.body["first_name"]+"' SET p.last_name = '"+request.body["last_name"]+"'"
         }
       ]
     }
