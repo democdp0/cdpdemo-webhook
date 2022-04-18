@@ -175,10 +175,10 @@ session
       console.log(error)
     }
   })
-  
+
 process.stdin.resume();//so the program will not close instantly
 
-function exitHandler(options, exitCode) {
+async function exitHandler(options, exitCode) {
     if (options.cleanup) 
     {
       console.log('clean');
