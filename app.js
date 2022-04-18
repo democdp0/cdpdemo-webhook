@@ -135,7 +135,7 @@ router.post('/neo4jjson', async (request, response) => {
   .then(res => {
     response.statusCode = 200;
     console.log(res);
-    response.send("ok");
+    response.send(res);
   })
   .catch(error => {
     console.error(error)
