@@ -159,13 +159,11 @@ let data = {
 axios
 .post('https://neo4j.cdpdemodashboard.tk:7473/db/data/transaction/commit', data,config)
 .then(res => {
-  response.statusCode = 200;
-  response.send("ok");
+
 })
 .catch(error => {
   console.error(error)
-  response.statusCode = 401;
-  response.send(error);
+
 })
 
 
