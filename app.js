@@ -160,7 +160,7 @@ router.get('/testtest', async (request, response) => {
   }
   
   axios
-  .post('https://neo4j.cdpdemodashboard.tk:7473/db/data/transaction/commit', data,config)
+  .post('http://34.143.223.200:7474/db/data/transaction/commit', data,config)
   .then(res => {
   console.log("receive response" + res);
   response.statusCode = 200;
