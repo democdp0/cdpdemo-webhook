@@ -134,8 +134,8 @@ router.post('/neo4jjson', async (request, response) => {
   .post('http://34.143.223.200:7474/db/data/transaction/commit', data,config)
   .then(res => {
     response.statusCode = 200;
-    console.log(res.data);
-    response.send("ok");
+    console.log(res.data["results"][0]);
+    response.send(res.data["results"][0]);
   })
   .catch(error => {
     console.error(error)
