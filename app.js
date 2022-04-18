@@ -113,6 +113,36 @@ router.post('/newcustomer', async (request, response) => {
    
 });
 
+
+router.get('/neo4jjson', async (request, response) => {
+
+  let config = {
+    headers: {
+      Authorization: "Basic bmVvNGo6ZHQ=",
+    }
+  }
+
+  let data = {
+    "statements": [
+      {
+        "statement": "MATCH (p)-[c:CUSTOMER]->(w) where c.wp_userid = toInteger("+request.body["id"]+") OPTIONAL MATCH (p)-[b:BOUGHT]->(prod) OPTIONAL MATCH (p)-[v:visited]->(blog)     RETURN p,w,b,c,prod,v,blog"
+      }
+    ]
+  }
+
+  axios
+  .post('http://34.143.223.200:7474/db/data/transaction/commit', data,config)
+  .then(res => {
+    response.statusCode = 200;
+    response.send(res);
+  })
+  .catch(error => {
+    console.error(error)
+    response.statusCode = 401;
+    response.send(error);
+  })
+});
+
 router.get('/wordpressdb', async (request, response) => {
 
     const query = `SELECT *
