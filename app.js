@@ -159,28 +159,34 @@ var driver = neo4j.driver(
     logger: (level, message) => console.log(level + ' ' + message)
   }} 
 )
-var session = driver.session({
-  database: 'neo4j',
+
+var rxSession = driver.rxSession({
+  database: 'foo',
   defaultAccessMode: neo4j.session.WRITE
 })
-session
-  .run('MERGE (alice:Person {name : $nameParam}) RETURN alice.name AS name', {
-    nameParam: 'Alice'
-  })
-  .subscribe({
-    onKeys: keys => {
-      console.log(keys)
-    },
-    onNext: record => {
-      console.log(record.get('name'))
-    },
-    onCompleted: () => {
-      session.close() // returns a Promise
-    },
-    onError: error => {
-      console.log(error)
-    }
-  })
+
+// var session = driver.session({
+//   database: 'neo4j',
+//   defaultAccessMode: neo4j.session.WRITE
+// })
+// session
+//   .run('MERGE (alice:Person {name : $nameParam}) RETURN alice.name AS name', {
+//     nameParam: 'Alice'
+//   })
+//   .subscribe({
+//     onKeys: keys => {
+//       console.log(keys)
+//     },
+//     onNext: record => {
+//       console.log(record.get('name'))
+//     },
+//     onCompleted: () => {
+//       session.close() // returns a Promise
+//     },
+//     onError: error => {
+//       console.log(error)
+//     }
+//   })
 
 process.stdin.resume();//so the program will not close instantly
 
