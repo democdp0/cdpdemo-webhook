@@ -145,7 +145,8 @@ router.get('/wordpressdb', async (request, response) => {
 
 let config = {
   headers: {
-    Authorization: "Basic bmVvNGo6ZHQ=",
+    'Content-Type': 'application/json',
+    'Authorization': "Basic bmVvNGo6ZHQ=",
   }
 }
 let data = {
@@ -158,14 +159,7 @@ let data = {
 }
 
 axios
-.post('https://neo4j.cdpdemodashboard.tk:7473/db/data/transaction/commit', {
-
-  "statements": [
-    {
-      "statement": "MERGE  (p:Person {email:'purdy.dasia@osinski.com' }) SET p.first_name = 'Fan' SET p.last_name = 'Zheng Min'"
-    }
-  ]
-},config)
+.post('https://neo4j.cdpdemodashboard.tk:7473/db/data/transaction/commit', data,config)
 .then(res => {
 
 })
