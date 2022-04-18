@@ -159,7 +159,10 @@ var driver = neo4j.driver(
     logger: (level, message) => console.log(level + ' ' + message)
   }} 
 )
-var session = driver.session()
+var session = driver.session({
+  database: 'neo4j',
+  defaultAccessMode: neo4j.session.WRITE
+})
 session
   .run('MERGE (alice:Person {name : $nameParam}) RETURN alice.name AS name', {
     nameParam: 'Alice'
