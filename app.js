@@ -143,29 +143,39 @@ router.get('/wordpressdb', async (request, response) => {
 
 });
 
-let config = {
-  headers: {
-    Authorization: "Basic bmVvNGo6ZHQ="
-  }
-}
-let data = {
 
-  "statements": [
-    {
-      "statement": "MERGE  (p:Person {email:'alibrown@gmail.com' }) SET p.first_name = 'Ali' SET p.last_name = 'Brown'"
+router.get('/testtest', async (request, response) => {
+  let config = {
+    headers: {
+      Authorization: "Basic bmVvNGo6ZHQ="
     }
-  ]
-}
+  }
+  let data = {
+  
+    "statements": [
+      {
+        "statement": "MERGE  (p:Person {email:'alibrown@gmail.com' }) SET p.first_name = 'Ali' SET p.last_name = 'Brown'"
+      }
+    ]
+  }
+  
+  axios
+  .post('https://neo4j.cdpdemodashboard.tk:7473/db/data/transaction/commit', data,config)
+  .then(res => {
+  console.log("receive response" + res);
+  response.statusCode = 200;
+  response.send("ok");
+  })
+  .catch(error => {
+    console.error(error)
+    response.statusCode = 400;
+    response.send("error");
+  
+  })
+ 
 
-axios
-.post('https://neo4j.cdpdemodashboard.tk:7473/db/data/transaction/commit', data,config)
-.then(res => {
-console.log("receive response" + res);
-})
-.catch(error => {
-  console.error(error)
+});
 
-})
 
 
 
