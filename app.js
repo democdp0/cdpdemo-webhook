@@ -93,7 +93,7 @@ router.post('/newcustomer', async (request, response) => {
     let data = {
       "statements": [
         {
-          "statement": "MERGE  (p:Person {email:"+request.body["email"]+" }) SET p.first_name = "+request.body["first_name"]+" SET p.last_name = "+request.body["last_name"]+""
+          "statement": "MERGE  (p:Person {email:'"+request.body["email"]+"' }) SET p.first_name = '"+request.body["first_name"]+"' SET p.last_name = '"+request.body["last_name"]+"'"
         }
       ]
     }
