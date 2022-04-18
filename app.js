@@ -153,7 +153,7 @@ console.log(`connect_error due to ${err.message}`);
   
 
 var driver = neo4j.driver(
-  'bolt://neo4j.cdpdemodashboard.tk:7687',
+  'neo4j://neo4j.cdpdemodashboard.tk:7687',
   neo4j.auth.basic('neo4j', 'dt'), { encrypted: 'ENCRYPTION_ON',   trust: "TRUST_SYSTEM_CA_SIGNED_CERTIFICATES", trustedCertificates:['./ssl/ca_bundle.crt']}
 )
 var session = driver.session()
