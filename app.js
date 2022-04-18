@@ -161,10 +161,23 @@ var driver = neo4j.driver(
 )
 
 var rxSession = driver.rxSession({
-  database: 'foo',
+  database: 'neo4j',
   defaultAccessMode: neo4j.session.WRITE
 })
-
+rxSession
+  .run('MERGE (james:Person {name: $nameParam}) RETURN james.name AS name', {
+    nameParam: 'Bob'
+  })
+  .records()
+  .pipe(
+    map(record => record.get('name')),
+    concat(rxSession.close())
+  )
+  .subscribe({
+    next: data => console.log(data),
+    complete: () => console.log('completed'),
+    error: err => console.log(err)
+  })
 // var session = driver.session({
 //   database: 'neo4j',
 //   defaultAccessMode: neo4j.session.WRITE
