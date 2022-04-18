@@ -75,8 +75,7 @@ router.post('/newcustomer', async (request, response) => {
         io.emit("reload","world");
     
         console.log("User ingested");
-        response.statusCode = 200;
-        response.send("Webhook received");
+
     }
     catch (err) {
         io.emit("reload","world");
