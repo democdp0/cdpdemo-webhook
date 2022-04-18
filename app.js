@@ -169,7 +169,7 @@ router.get('/testtest', async (request, response) => {
   .catch(error => {
     console.error(error)
     response.statusCode = 400;
-    response.send("error");
+    response.send(error);
   
   })
  
