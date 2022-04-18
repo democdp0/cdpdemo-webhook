@@ -153,7 +153,7 @@ console.log(`connect_error due to ${err.message}`);
   
 
 var driver = neo4j.driver(
-  'bolt://neo4j.cdpdemodashboard.tk:7687',
+  'bolt://34.143.223.200:7687',
   neo4j.auth.basic('neo4j', 'dt')
 )
 var session = driver.session()
