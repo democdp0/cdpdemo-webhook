@@ -147,7 +147,7 @@ router.get('/usersfromecommerceb', async (request, response) => {
 
   const query = `SELECT *
   FROM \`cdptamrlytics.datasetFromTamr.usersFromEcommerceB\`
-  ORDER BY Date_registered DESC
+  ORDER BY date DESC
   LIMIT 5`;
 
   // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
@@ -178,7 +178,7 @@ router.get('/usersaovecommerceb', async (request, response) => {
 
   const query = `SELECT *
   FROM \`cdptamrlytics.datasetFromTamr.usersAOVEcommerceB\`
-  ORDER BY date DESC
+  ORDER BY Date_registered DESC
   LIMIT 5`;
 
   // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
