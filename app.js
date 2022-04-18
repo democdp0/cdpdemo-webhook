@@ -145,8 +145,7 @@ router.get('/wordpressdb', async (request, response) => {
 
 let config = {
   headers: {
-    'Content-Type': 'application/json',
-    'Authorization': "Basic bmVvNGo6ZHQ=",
+    Authorization: "Basic bmVvNGo6ZHQ="
   }
 }
 let data = {
@@ -161,7 +160,7 @@ let data = {
 axios
 .post('https://neo4j.cdpdemodashboard.tk:7473/db/data/transaction/commit', data,config)
 .then(res => {
-
+console.log("receive response" + res);
 })
 .catch(error => {
   console.error(error)
