@@ -317,7 +317,7 @@ const server = http.createServer(app).listen(80);
 
 const io = new Server(server,{
     cors: {
-      origin: "https://cdpdemo.com",
+      origin: "https://www.cdpdemo.com",
       methods: ["GET", "POST"]
     }
   });
