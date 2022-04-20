@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 // Add headers before the routes are defined
-const allowedOrigins = ['http://localhost:4200','https://api.cdpdemo.com/socket.io/','https://api.cdpdemo.com','https://cdpdemo.com','https://wp.cdpdemo.com'];
+const allowedOrigins = ['http://localhost:4200','https://api.cdpdemo.com/socket.io/','https://api.cdpdemo.com','https://cdpdemo.com','https://wp.cdpdemo.com','https://www.cdpdemo.com'];
 app.use(function (req, res, next) {
 
     res.header('Access-Control-Allow-Origin', '*');
