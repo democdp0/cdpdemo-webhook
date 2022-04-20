@@ -312,8 +312,8 @@ var options = {
 };
 
 
-http.createServer(app).listen(80);
-const server = https.createServer(options, app).listen(443)
+const server = http.createServer(app).listen(80);
+//const server = https.createServer(options, app).listen(443)
 
 const io = new Server(server,{
     cors: {
@@ -321,6 +321,7 @@ const io = new Server(server,{
       methods: ["GET", "POST"]
     }
   });
+
 io.on('connection', (socket) => {
     console.log('a user connected');
   });
