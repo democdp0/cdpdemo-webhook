@@ -315,12 +315,7 @@ var options = {
 const server = http.createServer(app).listen(80);
 //const server = https.createServer(options, app).listen(443)
 
-const io = new Server(server,{
-    cors: {
-      origin: ["https://www.cdpdemo.com","https://cdpdemo.com","https://api.cdpdemo.com"],
-      methods: ["GET", "POST"]
-    }
-  });
+const io = new Server();
 
 io.on('connection', (socket) => {
     console.log('a user connected');
