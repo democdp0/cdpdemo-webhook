@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 // Add headers before the routes are defined
-const allowedOrigins = ['http://localhost:4200','https://api.cdpdemodashboard.tk/socket.io/','https://api.cdpdemodashboard.tk','https://cdpdemodashboard.tk','https://cdpdemoportal.tk'];
+const allowedOrigins = ['http://localhost:4200','https://api.cdpdemo.com/socket.io/','https://api.cdpdemo.com','https://cdpdemo.com','https://wp.cdpdemo.com'];
 app.use(function (req, res, next) {
 
     res.header('Access-Control-Allow-Origin', '*');
@@ -93,7 +93,7 @@ router.post('/newcustomer', async (request, response) => {
     let data = {
       "statements": [
         {
-          "statement": "MERGE  (p:Person {email:'"+request.body["email"]+"' }) MERGE (w:Ecommerce {website:'https://cdpdemoportal.tk'}) MERGE (p)-[c:CUSTOMER {wp_userid: toInteger("+request.body["id"]+")}]->(w) SET p.first_name = '"+request.body["first_name"]+"' SET p.last_name = '"+request.body["last_name"]+"'"
+          "statement": "MERGE  (p:Person {email:'"+request.body["email"]+"' }) MERGE (w:Ecommerce {website:'https://wp.cdpdemo.com'}) MERGE (p)-[c:CUSTOMER {wp_userid: toInteger("+request.body["id"]+")}]->(w) SET p.first_name = '"+request.body["first_name"]+"' SET p.last_name = '"+request.body["last_name"]+"'"
         }
       ]
     }
@@ -317,7 +317,7 @@ const server = https.createServer(options, app).listen(443)
 
 const io = new Server(server,{
     cors: {
-      origin: "https://cdpdemodashboard.tk",
+      origin: "https://cdpdemo.com",
       methods: ["GET", "POST"]
     }
   });
